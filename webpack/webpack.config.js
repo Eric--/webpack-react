@@ -15,7 +15,7 @@ module.exports = {
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080',
     //刷新end
-    path.resolve(__dirname, 'js/entry.js')
+    path.resolve(__dirname, 'js/entry.jsx')
   ],
   //入口文件输出配置
   output: {
