@@ -4,7 +4,7 @@ require("../css/style.css");
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Hello = require('./component.jsx');
-var myDivElement = <div className="foo">test  aaadd</div>;
+var myDivElement = <div className="foo">test  aaad</div>;
 var names = ['Alice', 'Emily', 'Kate'];
 
 
@@ -23,5 +23,6 @@ var names = ['Alice', 'Emily', 'Kate'];
 // var ComponentMount = require('./com_mount.jsx');
 var RepoList = require('./githubres.jsx');
 
-ReactDOM.render(<RepoList promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')} />,
-document.getElementById('app'));
+// ReactDOM.render(<RepoList promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')} />,
+// document.getElementById('app'));
+ReactDOM.render(myDivElement, document.getElementById('app'));

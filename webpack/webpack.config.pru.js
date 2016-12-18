@@ -1,8 +1,3 @@
-/**
- * learning-gulp - webpack.config.js
- * Created by mengdesen on 15/4/14.
- */
-
 'use strict';
 
 var webpack = require('webpack');
@@ -12,10 +7,6 @@ module.exports = {
   //页面入口文件配置
   entry: {
     bundle: [
-      //刷新start
-      'webpack/hot/dev-server',
-      'webpack-dev-server/client?http://localhost:8080',
-      //刷新end
       path.resolve(__dirname, 'js/entry.jsx')
     ],
     vendor:[
@@ -58,8 +49,11 @@ module.exports = {
         minChunks: Infinity,
         filename:`js/[name].js`
     }),
-    new webpack.BannerPlugin('This file is create by eray'),//备注插件
-    new webpack.HotModuleReplacementPlugin()//自动刷新插件
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ],
   //其它解决方案配置
   resolve: {
