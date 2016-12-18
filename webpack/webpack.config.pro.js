@@ -9,7 +9,7 @@ module.exports = {
     bundle: [
       path.resolve(__dirname, 'js/entry.jsx')
     ],
-    vendor:[
+    'react.min':[
         'react',
         'react-dom'
     ]
@@ -50,7 +50,7 @@ module.exports = {
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        names: ["vendor"],
+        names: ["react.min"],
         minChunks: Infinity,
         filename:`js/[name].js`
     }),
