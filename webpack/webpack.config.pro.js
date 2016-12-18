@@ -44,9 +44,9 @@ module.exports = {
   },
   //插件
   plugins: [
-    new webpack.DefinePlugin({//减少3kb
+    new webpack.DefinePlugin({//减少72kb
       'process.env': {
-        NODE_ENV: 'production'
+        NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
