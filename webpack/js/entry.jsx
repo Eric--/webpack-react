@@ -5,8 +5,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Hello = require('./component.jsx');
 var myDivElement = <div className="foo">test  aaad</div>;
-var names = ['Alice', 'Emily', 'Kate'];
-
 
 // var Avatar = require('./avatar.jsx');
 //
@@ -20,8 +18,12 @@ var names = ['Alice', 'Emily', 'Kate'];
 //
 // var Refprop = require('./refprop.jsx');
 
+var People = require('./es6.js');
+var p1 = new People("xiaolong");
+p1.sayHi();
+
 // var ComponentMount = require('./com_mount.jsx');
-var RepoList = require('./githubres.jsx');
+// var RepoList = require('./githubres.jsx');
 
 // ReactDOM.render(<RepoList promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')} />,
 // document.getElementById('app'));
