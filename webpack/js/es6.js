@@ -78,6 +78,23 @@ class People {
       console.log(val);
     }
 
+    set prop(val){
+      this.age = val;
+      console.log(self);
+    }
+
+    get prop(){
+      return this.age;
+    }
+
+    static getEle(){
+      return 'ddd';
+    }
+
+    static sayEle(){
+      return People.getEle();
+    }
+
 }
 
 module.exports = People;
