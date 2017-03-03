@@ -95,6 +95,16 @@ class People {
       return People.getEle();
     }
 
+    static calcEggs(total){
+      var arr = [];
+      for(var i = 0; i < total; i++){
+        if(i%2 == 1 && i%3 == 0 && i%4 == 1 && i%5 == 1 && i%6 == 3 && i%7 == 0 && i%8 == 1 && i%9 == 0){
+          arr.push(i);
+        }
+      }
+      return arr.join(",");
+    }
+
 }
 
 module.exports = People;

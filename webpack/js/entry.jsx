@@ -24,6 +24,7 @@ p1.sayHi();
 p1.prop = 12334;
 console.log(p1.prop);
 console.log(People.sayEle());
+console.log(People.calcEggs(10000));
 
 // var ComponentMount = require('./com_mount.jsx');
 var RepoList = require('./githubres.jsx');
