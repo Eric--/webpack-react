@@ -12,4 +12,5 @@
 
 7.  webpack --display-error-details    //打印错误细节，查找原因
 
-8.  
+8.  webpack.config.pro.js 中没有配置webpack-dev-server,所以启动会报错
+    要使用正常服务器启动
