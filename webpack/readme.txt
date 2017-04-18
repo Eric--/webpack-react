@@ -14,3 +14,5 @@
 
 8.  webpack.config.pro.js 中没有配置webpack-dev-server,所以启动会报错
     要使用正常服务器启动
+
+9.  package.json 要保存当前webpack和webpack-dev-server的版本，所以项目下也要安装webpack和webpack-dev-server
