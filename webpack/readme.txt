@@ -16,3 +16,8 @@
     要使用正常服务器启动
 
 9.  package.json 要保存当前webpack和webpack-dev-server的版本，所以项目下也要安装webpack和webpack-dev-server
+
+10. webpack --colors --profile --display-modules --sort-modules-by size
+
+11. 后来又发现的一个更屌的可视化分析工具 webpack-bundle-analyzer
+
