@@ -1,4 +1,5 @@
-1.  webpack --display-error-details //执行
+### 执行
+    * webpack --display-error-details  使用默认配置
 
 2.  webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包
 
