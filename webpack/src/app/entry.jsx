@@ -1,4 +1,3 @@
-require("../css/style.css");
 
 //react
 var React = require('react');

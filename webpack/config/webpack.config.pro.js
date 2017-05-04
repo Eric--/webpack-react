@@ -1,20 +1,13 @@
-'use strict';
+/**
+  * user config for production
+  */
 
 var webpack = require('webpack');
 var path = require('path'); //路径使用，兼容各个系统使用
 
 module.exports = {
-  //页面入口文件配置
-  entry: {
-    bundle: [
-      path.resolve(__dirname, 'js/entry.jsx')
-    ],
-    'react.min':[
-        'react',
-        'react-dom'
-    ]
-  },
-  //入口文件输出配置
+
+  //文件输出配置
   output: {
     path: __dirname,
     filename: 'js/[name].js'
