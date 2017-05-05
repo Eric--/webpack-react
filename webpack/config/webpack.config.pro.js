@@ -1,72 +1,58 @@
 /**
-  * user config for production
-  */
+ * user config for production
+ */
 
-var webpack = require('webpack');
-var path = require('path'); //路径使用，兼容各个系统使用
+let webpack = require('webpack');
+let webpackMerge = require('webpack-merge');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CompressionPlugin = require("compression-webpack-plugin");
+let commonConfig = require('./webpack.config.com.js');
+let helpers = require('./helpers');
 
-module.exports = {
+let relPath = './lib/',
+    publicPath = '';
+if (process.env.NODE_ABS) { //设置打包路径
+    relPath = '';
+    publicPath = '/';
+}
 
-  //文件输出配置
-  output: {
-    path: __dirname,
-    filename: 'js/[name].js'
-  },
-  module: {
-    //加载器配置
-    loaders: [{
-      //.css 文件使用 style-loader 和 css-loader 来处理
-      test: /\.css$/,
-      loader: 'style!css'
-    }, {
-      //.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
-      test: /\.scss$/,
-      loader: 'style!css!sass?sourceMap'
-    }, {
-      //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }, {
-      //.js jsx 文件使用 babel-loader 来编译处理
-      test: /\.js|jsx$/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015']
-      }
-    }]
-  },
-  //插件
-  plugins: [
-    new webpack.DefinePlugin({//减少72kb
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-        names: ["react.min"],
-        minChunks: Infinity,
-        filename:`js/[name].js`
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        comments: false
-      },
-      compress: {
-        warnings: false
-      }
-    })
-  ],
-  //其它解决方案配置
-  resolve: {
-    //查找module的话从这里开始查找
-    root: 'E:/github/nodes/webpack', //绝对路径
-    //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
-    extensions: ['', '.js', 'jsx', '.json', '.scss'],
-    //模块别名定义，方便后续直接引用别名，无须多写长长的地址
-    alias: {
-      AppStore: './js/stores/AppStores.js', //后续直接 require('AppStore') 即可
-      ActionType: './js/actions/ActionType.js',
-      AppAction: './js/actions/AppAction.js'
-    }
-  }
-};
+module.exports = webpackMerge(commonConfig, {
+
+    devtool: 'cheap-module-source-map',
+
+    output: {
+        path: helpers.root('dist'), // path+filename js package path
+        publicPath: publicPath, //inject html use relative path or absolute path
+        filename: relPath + '[name].[hash].js',
+        chunkFilename: relPath + '[id].[hash].chunk.js'
+    },
+
+    module: {
+        //加载器配置
+        rules: [{
+            //将样式抽取出来为独立的文件
+            test: /\.css$/,
+            exclude: helpers.root('src', 'app'),
+            loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        }]
+    },
+
+    //插件
+    plugins: [
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.3
+        }),
+
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+
+        new ExtractTextPlugin('[name].css')
+    ]
+});
