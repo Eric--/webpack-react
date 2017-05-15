@@ -5,6 +5,7 @@
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let path = require('path');
 let helpers = require('./helpers');
@@ -13,7 +14,7 @@ module.exports = {
 
     //入口文件配置
     entry: {
-        app: helpers.root('src', 'app/entry.jsx'),
+        app: helpers.root('src', 'app/app.jsx'),
         vendor: helpers.root('src', 'js/vendor.js')
     },
 
@@ -72,11 +73,14 @@ module.exports = {
         }),
         //自定义插件
         new webpack.LoaderOptionsPlugin({
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: helpers.root('src', 'css'), to: 'css'}
+        ])
     ],
     //其它解决方案配置
     resolve: {
         //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
-        extensions: ['.ts', '.js', 'jsx', '.json', '.scss']
+        extensions: ['.ts', '.js', '.jsx', '.json', '.scss']
     }
 };

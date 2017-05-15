@@ -11,4 +11,4 @@ function getCookie(name){
 module.exports = {
   setCookie: setCookie,
   getCookie: getCookie
-}
+};

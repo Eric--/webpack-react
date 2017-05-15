@@ -8,6 +8,7 @@ let helpers = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',//webpack -d default use
+    // devtool: 'cheap-module-source-map',
 
     //入口文件输出配置
     output: {
