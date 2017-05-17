@@ -17,7 +17,11 @@ class LoginPopupCom extends React.Component {
 	}
 
 	hide(e){
+		this.props.toggleLoginPopup(false);
+	}
 
+	componentWillUpdate(){
+	  console.log('loginPopup update');
 	}
 
 	render() {

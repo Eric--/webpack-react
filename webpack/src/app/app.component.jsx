@@ -14,25 +14,24 @@ class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      liked: false
+        layerHidden: true,
+        loginPopupShow: true,
+        loginStatus: false,
+        userName: ''
     };
 
-    this.layerHidden = true;
-    this.loginPopupShow = true;
-    this.loginStatus = false;
-    this.userName = '';
   }
 
-  handleBtnClick(e){
-    console.log(this.state.liked);
-    console.log(this.props.maxLoops);
-    this.setState({liked: !this.state.liked});
+  toggleLoginPopup(show){
+      this.setState({
+        loginPopupShow: show,
+        layerHidden: true
+      });
   }
 
   render() {
 
     console.log('render');
-    var text = this.state.liked ? 'liked' : 'haven\'t liked';
     return (
       <div>
         <div className="container container-xl">
@@ -41,16 +40,16 @@ class AppComponent extends React.Component {
 
             <div className="page-right">
 
-                <TopbarCom loginStatus={this.loginStatus} userName={this.userName}></TopbarCom>
+                <TopbarCom loginStatus={this.state.loginStatus} userName={this.state.userName}></TopbarCom>
 
                 <router-outlet></router-outlet>
             
             </div>
         </div>
 
-        <LoginPopupCom show={this.loginPopupShow}></LoginPopupCom> 
+        <LoginPopupCom show={this.state.loginPopupShow} toggleLoginPopup={show=>this.toggleLoginPopup(show)}></LoginPopupCom> 
 
-        <div className="overlay" hidden={this.layerHidden}></div>
+        <div className="overlay" hidden={this.state.layerHidden}></div>
       </div>
       );
   }
@@ -69,22 +68,20 @@ class AppComponent extends React.Component {
 
       let userName = CookieService.getCookie('sys_username');
       if(userName){
-        this.userName = userName;
-        this.loginStatus = true;
-        this.loginPopupShow = false;
+        this.setState({
+          userName: userName,
+          loginStatus: true,
+          loginPopupShow: false
+        });
       }else{
-        this.layerHidden = false;
+        this.setState({
+          layerHidden: false
+        });
       }
   }
 
   componentDidMount(){
     console.log('componentDidMount');
-    setTimeout(function(){
-      console.log('setTimeout');
-    }, 0);
-    for(var i = 0; i < 10; i++){
-      console.log(i);
-    }
   }
 
   //卸载
